@@ -241,7 +241,11 @@ namespace TicTacToeLibrary
                     }
                     if (gm.CheckWinner())
                     {
-                        Console.WriteLine(String.Format("[{0}] Win", firstPlayer.Symbol));
+                        Console.Clear();
+                        Console.Write(String.Format("PG 1 [{0}]", gm.player1.Symbol));
+                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", gm.player2.Symbol));
+                        gm.grid.PrintGrid();
+                        Console.WriteLine(String.Format("\n[{0}] Win", firstPlayer.Symbol));
                         firstPlayer.IsWinner = true;
                         Console.ReadKey();
                     }
@@ -302,7 +306,11 @@ namespace TicTacToeLibrary
                     }
                     if (gm.CheckWinner())
                     {
-                        Console.WriteLine(String.Format("[{0}] Win", secondPlayer.Symbol));
+                        Console.Clear();
+                        Console.Write(String.Format("PG 1 [{0}]", gm.player1.Symbol));
+                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", gm.player2.Symbol));
+                        gm.grid.PrintGrid();
+                        Console.WriteLine(String.Format("\n[{0}] Win", secondPlayer.Symbol));
                         firstPlayer.IsWinner = true;
                         Console.ReadKey();
                     }
