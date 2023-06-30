@@ -28,9 +28,8 @@ namespace TicTacToeLibrary
         }
 
         // For select the symbol OK
-        public bool SelectSymbol(Player pg1, Player pg2)
+        public bool SelectSymbol(string choicePG,Player pg1, Player pg2)
         {
-            string? choicePG = Console.ReadLine();
             if (int.TryParse(choicePG, out int resultPG))
             {
                 switch (resultPG)
@@ -53,9 +52,8 @@ namespace TicTacToeLibrary
         }
 
         // For choice the game mode OK
-        public bool SelectGameMode()
+        public bool SelectGameMode(string choice)
         {
-            string? choice = Console.ReadLine();
             if (int.TryParse(choice, out int result))
             {
                 switch (result)
@@ -74,9 +72,8 @@ namespace TicTacToeLibrary
         }
 
         // For set the turnOrder and assign symbol to player OK
-        public (bool condition, Player? first, Player? second) LoadPlayer()
+        public (bool condition, Player? first, Player? second) LoadPlayer(string choice)
         {
-            string? choice = Console.ReadLine();
             if (int.TryParse(choice, out int result))
             {
                 switch (result)

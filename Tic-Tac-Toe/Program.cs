@@ -17,7 +17,8 @@ internal class Program
             Console.WriteLine("Do yoy wanna play");
             Console.WriteLine("1 - Player 1 VS Player 2\n2 - Player 1 VS CPU");
             Console.Write("\nInsert Your choice: ");
-            bool choice = gm.SelectGameMode();
+            string? choiceGameMode = Console.ReadLine();
+            bool choice = gm.SelectGameMode(choiceGameMode);
             if (choice == true)
             {
                 Console.Write("Not valid input, press any key and try again...");
@@ -37,7 +38,8 @@ internal class Program
             Console.WriteLine("Do you wanna start");
             Console.WriteLine("1 - Player 1\n2 - Player 2");
             Console.Write("\nInsert choice: ");
-            var (condition, first, second) = gm.LoadPlayer();
+            string? choiceLoopPlayer = Console.ReadLine();
+            var (condition, first, second) = gm.LoadPlayer(choiceLoopPlayer);
             if (condition == true)
             {
                 Console.Write("Not valid input, press any key and try again...");
@@ -52,7 +54,8 @@ internal class Program
                 {
                     Console.WriteLine("Choice Your Symbol");
                     Console.WriteLine("1 - X\n2 - O");
-                    bool choice = gm.SelectSymbol(first, second);
+                    string? choiceSymbol= Console.ReadLine();
+                    bool choice = gm.SelectSymbol(choiceSymbol,first, second);
                     if (choice == true)
                     {
                         Console.Write("Not valid input, press any key and try again...");
