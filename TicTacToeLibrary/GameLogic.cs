@@ -135,7 +135,7 @@ namespace TicTacToeLibrary
             return false;
         }
 
-        public static void StartGame(Player o1,Player o2)
+        public void StartGame(Player o1,Player o2)
         {
             var gm = new GameLogic();
             Player firstPlayer = o1;
