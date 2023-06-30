@@ -12,119 +12,95 @@ namespace TicTacToeLibrary
         private string _gameMode = "";
         private Player[] _turnOrder = new Player[2];
         private int _turnCount = 1;
-        private int _globalTurn = 1;
-
 
         Grid grid = new Grid();
 
-        // For select the symbol
-        private static void SelectSymbol(Player pg1, Player pg2)
+        public string GameMode
         {
-            bool loopPG = true;
-            do
-            {
-                Console.Clear();
-                Console.WriteLine("Choice Your Symbol");
-                Console.WriteLine("1 - X\n2 - O");
-                string? choicePG = Console.ReadLine();
-                if (int.TryParse(choicePG, out int resultPG))
-                {
-                    switch (resultPG)
-                    {
-                        case 1:
-                            pg1.Symbol = Symbol.X;
-                            pg2.Symbol = Symbol.O;
-                            loopPG = false;
-                            break;
-                        case 2:
-                            pg1.Symbol = Symbol.O;
-                            pg2.Symbol = Symbol.X;
-                            loopPG = false;
-                            break;
-                        default:
-                            Console.WriteLine("Not Valid Choice");
-                            Console.ReadKey();
-                            break;
-                    }
-                }
-            } while (loopPG);
+            get { return _gameMode; }
+            set { _gameMode = value; }
         }
 
-        // For choice the game mode
-        private void SelectGameMode()
+        public Player[] TurnOrder
         {
-            bool loop = true;
-            do
-            {
-                Console.WriteLine("Do yoy wanna play");
-                Console.WriteLine("1 - Player 1 VS Player 2\n2 - Player 1 VS CPU");
-                Console.Write("\nInsert Your choice: ");
-                string? choice = Console.ReadLine();
-                if (int.TryParse(choice, out int result))
-                {
-                    switch (result)
-                    {
-                        case 1:
-                            _gameMode = "P1 vs P2";
-                            loop = false;
-                            Console.Clear();
-                            break;
-                        case 2:
-                            _gameMode = "P1 vs CPU";
-                            loop = false;
-                            Console.Clear();
-                            break;
-                        default:
-                            Console.WriteLine("Not Valid Choice...Try again");
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                    }
-
-                }
-            } while (loop);
+            get { return _turnOrder; }
+            private set { _turnOrder = value; }
         }
 
-        // For set the turnOrder and assign symbol to player
-        private void LoadPlayer()
+        // For select the symbol OK
+        public bool SelectSymbol(Player pg1, Player pg2)
         {
-            bool loop = true;
-            do
+            string? choicePG = Console.ReadLine();
+            if (int.TryParse(choicePG, out int resultPG))
             {
-                Console.WriteLine("Do you wanna start");
-                Console.WriteLine("1 - Player 1\n2 - Player 2");
-                Console.Write("\nInsert choice: ");
-                string? choice = Console.ReadLine();
-                if (int.TryParse(choice, out int result))
+                switch (resultPG)
                 {
-                    switch (result)
-                    {
-                        case 1:
-                            _turnOrder[0] = player1;
-                            _turnOrder[1] = player2;
-                            SelectSymbol(player1, player2);
-                            loop = false;
-                            Console.Clear();
-                            break;
-                        case 2:
-
-                            _turnOrder[0] = player2;
-                            _turnOrder[1] = player1;
-                            SelectSymbol(player2, player1);
-                            loop = false;
-                            Console.Clear();
-                            break;
-                        default:
-                            Console.WriteLine("Not Valid Choice...Try again");
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                    }
-
+                    case 1:
+                        pg1.Symbol = Symbol.X;
+                        pg2.Symbol = Symbol.O;
+                        return false;
+                    case 2:
+                        pg1.Symbol = Symbol.O;
+                        pg2.Symbol = Symbol.X;
+                        return false;
+                    default:
+                        return true;
                 }
-            } while (loop);
+
+            }
+            return true;
+
         }
 
+        // For choice the game mode OK
+        public bool SelectGameMode()
+        {
+            string? choice = Console.ReadLine();
+            if (int.TryParse(choice, out int result))
+            {
+                switch (result)
+                {
+                    case 1:
+                        GameMode = "P1 vs P2";
+                        return false;
+                    case 2:
+                        GameMode = "P1 vs CPU";
+                        return false;
+                    default:
+                        return true;
+                }
+            }
+            return true;
+        }
+
+        // For set the turnOrder and assign symbol to player OK
+        public (bool condition, Player? first, Player? second) LoadPlayer()
+        {
+            string? choice = Console.ReadLine();
+            if (int.TryParse(choice, out int result))
+            {
+                switch (result)
+                {
+                    case 1:
+                        TurnOrder[0] = this.player1;
+                        TurnOrder[1] = this.player2;
+                        Console.Clear();
+                        return (false, this.player1, this.player2);
+                    case 2:
+
+                        TurnOrder[0] = this.player2;
+                        TurnOrder[1] = this.player1;
+                        Console.Clear();
+                        return (false, this.player2, this.player1);
+                    default:
+                        return (true, null, null);
+                }
+
+            }
+            return (true, null, null);
+        }
+
+        // All winner condition OK
         private bool CheckWinner()
         {
             string[,] matrix = grid.GameGrid;
@@ -165,8 +141,6 @@ namespace TicTacToeLibrary
         public static void StartGame()
         {
             var gm = new GameLogic();
-            gm.SelectGameMode();
-            gm.LoadPlayer();
             Player firstPlayer = gm._turnOrder[0];
             Player secondPlayer = gm._turnOrder[1];
 
@@ -325,6 +299,7 @@ namespace TicTacToeLibrary
 
                 Console.Clear();
             } while (!(firstPlayer.IsWinner || secondPlayer.IsWinner || gm.grid.FilledMatrix()));
+
             Console.WriteLine("Do you wanna play again?");
             Console.WriteLine("Y - Yes\nN - No");
             Console.Write("Make Your choice: ");
