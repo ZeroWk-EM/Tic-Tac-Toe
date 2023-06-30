@@ -37,13 +37,6 @@ namespace TicTacToeLibrary.Models
             set { _isWinner = value; }
         }
 
-
-        // Reset all data if you want to continue the game
-        public void ResetData()
-        {
-
-        }
-
         public override string ToString()
         {
             return String.Format("Choosen Symbol [{0}]\nWinner Player Count [{1}]", Symbol.ToString(), CounterWin);

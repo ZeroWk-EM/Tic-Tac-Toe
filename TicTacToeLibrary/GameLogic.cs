@@ -13,7 +13,7 @@ namespace TicTacToeLibrary
         private Player[] _turnOrder = new Player[2];
         private int _turnCount = 1;
 
-        Grid grid = new Grid();
+        Grid grid = new();
 
         public string GameMode
         {
@@ -28,7 +28,7 @@ namespace TicTacToeLibrary
         }
 
         // For select the symbol OK
-        public bool SelectSymbol(string choicePG,Player pg1, Player pg2)
+        public static bool SelectSymbol(string choicePG,Player pg1, Player pg2)
         {
             if (int.TryParse(choicePG, out int resultPG))
             {
@@ -137,17 +137,16 @@ namespace TicTacToeLibrary
 
         public void StartGame(Player o1,Player o2)
         {
-            var gm = new GameLogic();
             Player firstPlayer = o1;
             Player secondPlayer = o2;
 
             do
             {
 
-                Console.Write(String.Format("PG 1 [{0}]", gm.player1.Symbol));
-                Console.WriteLine(String.Format(" PG 2 [{0}]", gm.player2.Symbol));
-                Console.WriteLine(String.Format("Selected Game Mode [{0}]\n", gm._gameMode));
-                gm.grid.PrintGrid();
+                Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
+                Console.WriteLine(String.Format(" PG 2 [{0}]", player2.Symbol));
+                Console.WriteLine(String.Format("Selected Game Mode [{0}]\n", _gameMode));
+                grid.PrintGrid();
                 Console.WriteLine("===========");
                 Console.WriteLine("7 - [0,0]");
                 Console.WriteLine("8 - [0,1]");
@@ -160,7 +159,7 @@ namespace TicTacToeLibrary
                 Console.WriteLine("3 - [2,2]");
                 Console.WriteLine("===========");
 
-                if (gm._turnCount == 1)
+                if (_turnCount == 1)
                 {
                     Console.Write("Player Do wanna put the symbol: ");
                     string? choice = Console.ReadLine();
@@ -170,35 +169,35 @@ namespace TicTacToeLibrary
                         switch (result)
                         {
                             case 1:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 2, 0);
+                                grid.InsertSymbol(firstPlayer.Symbol, 2, 0);
                                 break;
                             case 2:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 2, 1);
+                                grid.InsertSymbol(firstPlayer.Symbol, 2, 1);
                                 break;
                             case 3:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 2, 2);
+                                grid.InsertSymbol(firstPlayer.Symbol, 2, 2);
                                 break;
                             case 4:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 1, 0);
+                                grid.InsertSymbol(firstPlayer.Symbol, 1, 0);
                                 break;
                             case 5:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 1, 1);
+                                grid.InsertSymbol(firstPlayer.Symbol, 1, 1);
                                 break;
                             case 6:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 1, 2);
+                                grid.InsertSymbol(firstPlayer.Symbol, 1, 2);
                                 break;
                             case 7:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 0, 0);
+                                grid.InsertSymbol(firstPlayer.Symbol, 0, 0);
                                 break;
                             case 8:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 0, 1);
+                                grid.InsertSymbol(firstPlayer.Symbol, 0, 1);
                                 break;
                             case 9:
-                                gm.grid.InsertSymbol(firstPlayer.Symbol, 0, 2);
+                                grid.InsertSymbol(firstPlayer.Symbol, 0, 2);
                                 break;
                             default:
                                 Console.WriteLine("ERROR enter a value 1-9");
-                                gm._turnCount = 0;
+                                _turnCount = 0;
                                 Console.ReadKey();
                                 break;
                         }
@@ -207,25 +206,25 @@ namespace TicTacToeLibrary
                     else
                     {
                         Console.WriteLine("Not valid char");
-                        gm._turnCount = 0;
+                        _turnCount = 0;
                         Console.ReadKey();
                     }
-                    if (gm.CheckWinner())
+                    if (CheckWinner())
                     {
                         Console.Clear();
-                        Console.Write(String.Format("PG 1 [{0}]", gm.player1.Symbol));
-                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", gm.player2.Symbol));
-                        gm.grid.PrintGrid();
+                        Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
+                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", player2.Symbol));
+                        grid.PrintGrid();
                         Console.WriteLine(String.Format("\n[{0}] Win", firstPlayer.Symbol));
                         firstPlayer.IsWinner = true;
                         Console.ReadKey();
                     }
-                    if (gm.grid.FilledMatrix())
+                    if (grid.FilledMatrix())
                     {
                         Console.WriteLine("Draw!!");
                         Console.ReadKey();
                     }
-                    gm._turnCount++;
+                    _turnCount++;
                 }
                 else
                 {
@@ -236,35 +235,35 @@ namespace TicTacToeLibrary
                         switch (result)
                         {
                             case 1:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 2, 0);
+                                grid.InsertSymbol(secondPlayer.Symbol, 2, 0);
                                 break;
                             case 2:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 2, 1);
+                                grid.InsertSymbol(secondPlayer.Symbol, 2, 1);
                                 break;
                             case 3:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 2, 2);
+                                grid.InsertSymbol(secondPlayer.Symbol, 2, 2);
                                 break;
                             case 4:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 1, 0);
+                                grid.InsertSymbol(secondPlayer.Symbol, 1, 0);
                                 break;
                             case 5:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 1, 1);
+                                grid.InsertSymbol(secondPlayer.Symbol, 1, 1);
                                 break;
                             case 6:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 1, 2);
+                                grid.InsertSymbol(secondPlayer.Symbol, 1, 2);
                                 break;
                             case 7:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 0, 0);
+                                grid.InsertSymbol(secondPlayer.Symbol, 0, 0);
                                 break;
                             case 8:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 0, 1);
+                                grid.InsertSymbol(secondPlayer.Symbol, 0, 1);
                                 break;
                             case 9:
-                                gm.grid.InsertSymbol(secondPlayer.Symbol, 0, 2);
+                                grid.InsertSymbol(secondPlayer.Symbol, 0, 2);
                                 break;
                             default:
                                 Console.WriteLine("ERROR enter a value 1-9");
-                                gm._turnCount = 3;
+                                _turnCount = 3;
                                 Console.ReadKey();
                                 break;
                         }
@@ -272,30 +271,30 @@ namespace TicTacToeLibrary
                     else
                     {
                         Console.WriteLine("Not valid char");
-                        gm._turnCount = 3;
+                        _turnCount = 3;
                         Console.ReadKey();
                     }
-                    if (gm.CheckWinner())
+                    if (CheckWinner())
                     {
                         Console.Clear();
-                        Console.Write(String.Format("PG 1 [{0}]", gm.player1.Symbol));
-                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", gm.player2.Symbol));
-                        gm.grid.PrintGrid();
+                        Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
+                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", player2.Symbol));
+                        grid.PrintGrid();
                         Console.WriteLine(String.Format("\n[{0}] Win", secondPlayer.Symbol));
                         firstPlayer.IsWinner = true;
                         Console.ReadKey();
                     }
-                    if (gm.grid.FilledMatrix())
+                    if (grid.FilledMatrix())
                     {
                         Console.WriteLine("Draw!!");
                         Console.ReadKey();
 
                     }
-                    gm._turnCount--;
+                    _turnCount--;
                 }
 
                 Console.Clear();
-            } while (!(firstPlayer.IsWinner || secondPlayer.IsWinner || gm.grid.FilledMatrix()));
+            } while (!(firstPlayer.IsWinner || secondPlayer.IsWinner || grid.FilledMatrix()));
 
             Console.WriteLine("Do you wanna play again?");
             Console.WriteLine("Y - Yes\nN - No");
