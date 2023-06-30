@@ -1,12 +1,11 @@
 ﻿using TicTacToeLibrary;
-using TicTacToeLibrary.Models;
 
 namespace Tic_Tac_Toe;
 
 internal class Program
 {
     // Main Method
-    static public void Main(String[] args)
+    static public void Main()
     {
         GameLogic gm = new();
 
@@ -57,7 +56,7 @@ internal class Program
                     Console.WriteLine("Choice Your Symbol");
                     Console.WriteLine("1 - X\n2 - O");
                     string? choiceSymbol = Console.ReadLine();
-                    bool choice = gm.SelectSymbol(choiceSymbol, first, second);
+                    bool choice = GameLogic.SelectSymbol(choiceSymbol, first, second);
                     if (choice == true)
                     {
                         Console.Write("Not valid input, press any key and try again...");
@@ -69,8 +68,8 @@ internal class Program
                     }
                 } while (selectSymbolLoop);
             }
-            Console.Write($"First {first}\nSecond {second}");
-            GameLogic.StartGame(first,second);
+    Console.Write($"First {first}\nSecond {second}");
+            gm.StartGame(first, second);
         } while (preMatch);
 
         Console.WriteLine("OUT ALL CYCLE");
