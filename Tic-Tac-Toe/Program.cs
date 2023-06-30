@@ -32,9 +32,10 @@ internal class Program
         } while (gameModeLoop);
 
         // SELECT STARTED PLAYER LOOP 
-        bool loadPlayerLoop = true;
+        bool preMatch = true;
         do
         {
+            Console.Clear();
             Console.WriteLine("Do you wanna start");
             Console.WriteLine("1 - Player 1\n2 - Player 2");
             Console.Write("\nInsert choice: ");
@@ -47,15 +48,16 @@ internal class Program
             }
             else
             {
-                loadPlayerLoop = false;
+                preMatch = false;
                 // SELECT SYMBOL LOOP
                 bool selectSymbolLoop = true;
                 do
                 {
+                    Console.Clear();
                     Console.WriteLine("Choice Your Symbol");
                     Console.WriteLine("1 - X\n2 - O");
-                    string? choiceSymbol= Console.ReadLine();
-                    bool choice = gm.SelectSymbol(choiceSymbol,first, second);
+                    string? choiceSymbol = Console.ReadLine();
+                    bool choice = gm.SelectSymbol(choiceSymbol, first, second);
                     if (choice == true)
                     {
                         Console.Write("Not valid input, press any key and try again...");
@@ -66,12 +68,10 @@ internal class Program
                         selectSymbolLoop = false;
                     }
                 } while (selectSymbolLoop);
-
-                Console.Write($"First {first}\nSecond {second}");
-                Console.ReadLine();
             }
-
-        } while (loadPlayerLoop);
+            Console.Write($"First {first}\nSecond {second}");
+            GameLogic.StartGame(first,second);
+        } while (preMatch);
 
         Console.WriteLine("OUT ALL CYCLE");
     }

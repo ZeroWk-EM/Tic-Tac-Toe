@@ -135,11 +135,11 @@ namespace TicTacToeLibrary
             return false;
         }
 
-        public static void StartGame()
+        public static void StartGame(Player o1,Player o2)
         {
             var gm = new GameLogic();
-            Player firstPlayer = gm._turnOrder[0];
-            Player secondPlayer = gm._turnOrder[1];
+            Player firstPlayer = o1;
+            Player secondPlayer = o2;
 
             do
             {
@@ -304,7 +304,6 @@ namespace TicTacToeLibrary
             if (replayChoice?.ToUpper() == "Y")
             {
                 Console.Clear();
-                StartGame();
             }
             else
             {
