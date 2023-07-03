@@ -28,7 +28,7 @@ namespace TicTacToeLibrary
         }
 
         // For select the symbol OK
-        public static bool SelectSymbol(string choicePG,Player pg1, Player pg2)
+        public static bool SelectSymbol(string choicePG, Player pg1, Player pg2)
         {
             if (int.TryParse(choicePG, out int resultPG))
             {
@@ -121,7 +121,7 @@ namespace TicTacToeLibrary
             else if (
              (matrix[0, 0] == "O" && matrix[0, 1] == "O" && matrix[0, 2] == "O") ||
              (matrix[1, 0] == "O" && matrix[1, 1] == "O" && matrix[1, 2] == "O") ||
-          
+
              (matrix[2, 0] == "O" && matrix[2, 1] == "O" && matrix[2, 2] == "O") ||
 
              (matrix[0, 0] == "O" && matrix[1, 0] == "O" && matrix[2, 0] == "O") ||
@@ -136,7 +136,25 @@ namespace TicTacToeLibrary
             return false;
         }
 
-        public void StartGame(Player o1,Player o2)
+        private bool IterativeCheckWinner(Symbol? playerSymbol)
+        {
+            string[,] matrix = grid.GameGrid;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.WriteLine(matrix[i, j] == playerSymbol.ToString());
+                    if (matrix[i, j] == playerSymbol.ToString())
+                    {
+                        Console.ReadKey();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void StartGame(Player o1, Player o2)
         {
             Player firstPlayer = o1;
             Player secondPlayer = o2;
@@ -210,7 +228,7 @@ namespace TicTacToeLibrary
                         _turnCount = 0;
                         Console.ReadKey();
                     }
-                    if (CheckWinner())
+                    if (IterativeCheckWinner(firstPlayer.Symbol))
                     {
                         Console.Clear();
                         Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
@@ -275,7 +293,7 @@ namespace TicTacToeLibrary
                         _turnCount = 3;
                         Console.ReadKey();
                     }
-                    if (CheckWinner())
+                    if (IterativeCheckWinner(secondPlayer.Symbol))
                     {
                         Console.Clear();
                         Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
