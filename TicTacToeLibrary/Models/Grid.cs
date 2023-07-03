@@ -5,78 +5,63 @@ namespace TicTacToeLibrary.Models
 {
     public class Grid
     {
-        private string[,] _gameGrid = new string[3, 3];
+        public const int MaxGridSize = 3;
+        private readonly Symbol?[,] _gameGrid = new Symbol?[MaxGridSize, MaxGridSize];
 
         public Grid()
         {
 
         }
 
-        public string[,] GameGrid
+        // Create a copy of game grid
+        public Symbol?[,] GetGrid()
         {
-            get { return _gameGrid; }
+            Symbol?[,] matrix = new Symbol?[MaxGridSize, MaxGridSize];
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                for (int j = 0; j < MaxGridSize; j++)
+                {
+                    matrix[i, j] = _gameGrid[i, j];
+                }
+            }
+            return matrix;
         }
 
         public void PrintGrid()
         {
+            Symbol?[,] grid = GetGrid();
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
 
-                    Console.Write(String.Format("[{0}]", _gameGrid[i, j]));
+                    Console.Write(String.Format("[{0}]", grid[i, j]));
                 }
                 Console.WriteLine();
             }
         }
 
-        public bool FilledMatrix()
+        public bool IsFilled(int row, int column)
         {
-            int count = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (_gameGrid[i, j] != null)
-                    {
-                        count++;
-                    }
-                }
-            }
+            return _gameGrid[row, column] != null;
+        }
 
-            if (count == 9)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        public static bool IsOut(int row, int column)
+        {
+            return row >= MaxGridSize || column >= MaxGridSize;
         }
 
         public void InsertSymbol(Symbol? symbol, int row, int column)
         {
-#pragma warning disable CS0162 // Unreachable code detected
-            for (int i = 0; i < 3; i++)
+            if (IsFilled(row, column))
             {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (GameGrid[row, column] == null)
-                    {
-                        GameGrid[row, column] = symbol.ToString();
-                        break;
-                    }
-                    else if (GameGrid[row, column] == "X" || GameGrid[row, column] == "O")
-                    {
-                        Console.WriteLine("This box already filled");
-                        Console.ReadKey();
-                        break;
-                    }
-                }
-                break;
+                throw new ArgumentException("Cell already filled");
             }
-#pragma warning restore CS0162 // Unreachable code detected
-
+            if (IsOut(row, column))
+            {
+                throw new ArgumentException("Exceed matrix bounds");
+            }
+            _gameGrid[row, column] = symbol;
         }
     }
 }

@@ -68,7 +68,7 @@ internal class Program
                     }
                 } while (selectSymbolLoop);
             }
-    Console.Write($"First {first}\nSecond {second}");
+            Console.Write($"First {first}\nSecond {second}");
             gm.StartGame(first, second);
         } while (preMatch);
 

@@ -6,14 +6,13 @@ namespace TicTacToeLibrary
 {
     public class GameLogic
     {
-        Player player1 = new();
-        Player player2 = new();
+        readonly Player player1 = new();
+        readonly Player player2 = new();
 
         private string _gameMode = "";
         private Player[] _turnOrder = new Player[2];
-        private int _turnCount = 1;
 
-        Grid grid = new();
+        readonly Grid grid = new();
 
         public string GameMode
         {
@@ -100,56 +99,38 @@ namespace TicTacToeLibrary
         // TODO: RE-WRITE CONDITION
         private bool CheckWinner()
         {
-            string[,] matrix = grid.GameGrid;
+            Symbol?[,] matrix = grid.GetGrid();
 
             //RIGHE COLONNE DIAGONALI
 
             if (
-             (matrix[0, 0] == "X" && matrix[0, 1] == "X" && matrix[0, 2] == "X") ||
-             (matrix[1, 0] == "X" && matrix[1, 1] == "X" && matrix[1, 2] == "X") ||
-             (matrix[2, 0] == "X" && matrix[2, 1] == "X" && matrix[2, 2] == "X") ||
+             (matrix[0, 0] == Symbol.X && matrix[0, 1] == Symbol.X && matrix[0, 2] == Symbol.X) ||
+             (matrix[1, 0] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[1, 2] == Symbol.X) ||
+             (matrix[2, 0] == Symbol.X && matrix[2, 1] == Symbol.X && matrix[2, 2] == Symbol.X) ||
 
-             (matrix[0, 0] == "X" && matrix[1, 0] == "X" && matrix[2, 0] == "X") ||
-             (matrix[0, 1] == "X" && matrix[1, 1] == "X" && matrix[2, 1] == "X") ||
-             (matrix[0, 2] == "X" && matrix[1, 2] == "X" && matrix[2, 2] == "X") ||
+             (matrix[0, 0] == Symbol.X && matrix[1, 0] == Symbol.X && matrix[2, 0] == Symbol.X) ||
+             (matrix[0, 1] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[2, 1] == Symbol.X) ||
+             (matrix[0, 2] == Symbol.X && matrix[1, 2] == Symbol.X && matrix[2, 2] == Symbol.X) ||
 
-             (matrix[0, 0] == "X" && matrix[1, 1] == "X" && matrix[2, 2] == "X") ||
-             (matrix[0, 2] == "X" && matrix[1, 1] == "X" && matrix[2, 0] == "X"))
+             (matrix[0, 0] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[2, 2] == Symbol.X) ||
+             (matrix[0, 2] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[2, 0] == Symbol.X))
             {
                 return true;
             }
             else if (
-             (matrix[0, 0] == "O" && matrix[0, 1] == "O" && matrix[0, 2] == "O") ||
-             (matrix[1, 0] == "O" && matrix[1, 1] == "O" && matrix[1, 2] == "O") ||
+             (matrix[0, 0] == Symbol.O && matrix[0, 1] == Symbol.O && matrix[0, 2] == Symbol.O) ||
+             (matrix[1, 0] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[1, 2] == Symbol.O) ||
 
-             (matrix[2, 0] == "O" && matrix[2, 1] == "O" && matrix[2, 2] == "O") ||
+             (matrix[2, 0] == Symbol.O && matrix[2, 1] == Symbol.O && matrix[2, 2] == Symbol.O) ||
 
-             (matrix[0, 0] == "O" && matrix[1, 0] == "O" && matrix[2, 0] == "O") ||
-             (matrix[0, 1] == "O" && matrix[1, 1] == "O" && matrix[2, 1] == "O") ||
-             (matrix[0, 2] == "O" && matrix[1, 2] == "O" && matrix[2, 2] == "O") ||
+             (matrix[0, 0] == Symbol.O && matrix[1, 0] == Symbol.O && matrix[2, 0] == Symbol.O) ||
+             (matrix[0, 1] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[2, 1] == Symbol.O) ||
+             (matrix[0, 2] == Symbol.O && matrix[1, 2] == Symbol.O && matrix[2, 2] == Symbol.O) ||
 
-             (matrix[0, 0] == "O" && matrix[1, 1] == "O" && matrix[2, 2] == "O") ||
-             (matrix[0, 2] == "O" && matrix[1, 1] == "O" && matrix[2, 0] == "O"))
+             (matrix[0, 0] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[2, 2] == Symbol.O) ||
+             (matrix[0, 2] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[2, 0] == Symbol.O))
             {
                 return true;
-            }
-            return false;
-        }
-
-        private bool IterativeCheckWinner(Symbol? playerSymbol)
-        {
-            string[,] matrix = grid.GameGrid;
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.WriteLine(matrix[i, j] == playerSymbol.ToString());
-                    if (matrix[i, j] == playerSymbol.ToString())
-                    {
-                        Console.ReadKey();
-                        return true;
-                    }
-                }
             }
             return false;
         }
@@ -165,7 +146,6 @@ namespace TicTacToeLibrary
                 Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
                 Console.WriteLine(String.Format(" PG 2 [{0}]", player2.Symbol));
                 Console.WriteLine(String.Format("Selected Game Mode [{0}]\n", _gameMode));
-                grid.PrintGrid();
                 Console.WriteLine("===========");
                 Console.WriteLine("7 - [0,0]");
                 Console.WriteLine("8 - [0,1]");
@@ -178,155 +158,41 @@ namespace TicTacToeLibrary
                 Console.WriteLine("3 - [2,2]");
                 Console.WriteLine("===========");
 
-                if (_turnCount == 1)
-                {
-                    Console.Write("Player Do wanna put the symbol: ");
-                    string? choice = Console.ReadLine();
-                    if (int.TryParse(choice, out int result))
-                    {
+                Console.Write("Player Do wanna put the symbol: ");
 
-                        switch (result)
+                Console.Write("\nEnter row: ");
+                string? rowChoice = Console.ReadLine();
+
+                if (int.TryParse(rowChoice, out int resultRow))
+                {
+                    Console.Write("\nEnter column: ");
+                    string? columnChoice = Console.ReadLine();
+
+                    if (int.TryParse(columnChoice, out int resultColumn))
+                    {
+                        try
                         {
-                            case 1:
-                                grid.InsertSymbol(firstPlayer.Symbol, 2, 0);
-                                break;
-                            case 2:
-                                grid.InsertSymbol(firstPlayer.Symbol, 2, 1);
-                                break;
-                            case 3:
-                                grid.InsertSymbol(firstPlayer.Symbol, 2, 2);
-                                break;
-                            case 4:
-                                grid.InsertSymbol(firstPlayer.Symbol, 1, 0);
-                                break;
-                            case 5:
-                                grid.InsertSymbol(firstPlayer.Symbol, 1, 1);
-                                break;
-                            case 6:
-                                grid.InsertSymbol(firstPlayer.Symbol, 1, 2);
-                                break;
-                            case 7:
-                                grid.InsertSymbol(firstPlayer.Symbol, 0, 0);
-                                break;
-                            case 8:
-                                grid.InsertSymbol(firstPlayer.Symbol, 0, 1);
-                                break;
-                            case 9:
-                                grid.InsertSymbol(firstPlayer.Symbol, 0, 2);
-                                break;
-                            default:
-                                Console.WriteLine("ERROR enter a value 1-9");
-                                _turnCount = 0;
-                                Console.ReadKey();
-                                break;
+                            // DEBUG
+                            Console.WriteLine(grid.IsFilled(resultRow, resultColumn));
+                            Console.WriteLine(Grid.IsOut(resultRow, resultColumn));
+
+                            grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
+                            grid.PrintGrid();
+
+                            if (CheckWinner())
+                            {
+                                Console.WriteLine("WIN");
+                                Environment.Exit(0);
+                            }
                         }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Not valid char");
-                        _turnCount = 0;
-                        Console.ReadKey();
-                    }
-                    if (IterativeCheckWinner(firstPlayer.Symbol))
-                    {
-                        Console.Clear();
-                        Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
-                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", player2.Symbol));
-                        grid.PrintGrid();
-                        Console.WriteLine(String.Format("\n[{0}] Win", firstPlayer.Symbol));
-                        firstPlayer.IsWinner = true;
-                        Console.ReadKey();
-                    }
-                    if (grid.FilledMatrix())
-                    {
-                        Console.WriteLine("Draw!!");
-                        Console.ReadKey();
-                    }
-                    _turnCount++;
-                }
-                else
-                {
-                    Console.Write("Player Do wanna put the symbol: ");
-                    string? choice = Console.ReadLine();
-                    if (int.TryParse(choice, out int result))
-                    {
-                        switch (result)
+                        catch (Exception e)
                         {
-                            case 1:
-                                grid.InsertSymbol(secondPlayer.Symbol, 2, 0);
-                                break;
-                            case 2:
-                                grid.InsertSymbol(secondPlayer.Symbol, 2, 1);
-                                break;
-                            case 3:
-                                grid.InsertSymbol(secondPlayer.Symbol, 2, 2);
-                                break;
-                            case 4:
-                                grid.InsertSymbol(secondPlayer.Symbol, 1, 0);
-                                break;
-                            case 5:
-                                grid.InsertSymbol(secondPlayer.Symbol, 1, 1);
-                                break;
-                            case 6:
-                                grid.InsertSymbol(secondPlayer.Symbol, 1, 2);
-                                break;
-                            case 7:
-                                grid.InsertSymbol(secondPlayer.Symbol, 0, 0);
-                                break;
-                            case 8:
-                                grid.InsertSymbol(secondPlayer.Symbol, 0, 1);
-                                break;
-                            case 9:
-                                grid.InsertSymbol(secondPlayer.Symbol, 0, 2);
-                                break;
-                            default:
-                                Console.WriteLine("ERROR enter a value 1-9");
-                                _turnCount = 3;
-                                Console.ReadKey();
-                                break;
+                            Console.WriteLine(e.Message);
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("Not valid char");
-                        _turnCount = 3;
-                        Console.ReadKey();
-                    }
-                    if (IterativeCheckWinner(secondPlayer.Symbol))
-                    {
-                        Console.Clear();
-                        Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
-                        Console.WriteLine(String.Format(" PG 2 [{0}]\n", player2.Symbol));
-                        grid.PrintGrid();
-                        Console.WriteLine(String.Format("\n[{0}] Win", secondPlayer.Symbol));
-                        firstPlayer.IsWinner = true;
-                        Console.ReadKey();
-                    }
-                    if (grid.FilledMatrix())
-                    {
-                        Console.WriteLine("Draw!!");
-                        Console.ReadKey();
-
-                    }
-                    _turnCount--;
                 }
 
-                Console.Clear();
-            } while (!(firstPlayer.IsWinner || secondPlayer.IsWinner || grid.FilledMatrix()));
-
-            Console.WriteLine("Do you wanna play again?");
-            Console.WriteLine("Y - Yes\nN - No");
-            Console.Write("Make Your choice: ");
-            string? replayChoice = Console.ReadLine();
-            if (replayChoice?.ToUpper() == "Y")
-            {
-                Console.Clear();
-            }
-            else
-            {
-                Environment.Exit(0);
-            }
+            } while (!(firstPlayer.IsWinner || secondPlayer.IsWinner));
         }
     }
 }
