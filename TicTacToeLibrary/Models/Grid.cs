@@ -53,6 +53,7 @@ namespace TicTacToeLibrary.Models
                 throw new ArgumentException("Cell already filled");
             }
             _gameGrid[row, column] = symbol;
+
         }
     }
 }

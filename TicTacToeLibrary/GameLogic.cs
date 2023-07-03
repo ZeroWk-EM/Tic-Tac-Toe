@@ -6,6 +6,8 @@ namespace TicTacToeLibrary
 {
     public class GameLogic
     {
+        public const int MaxGridSize = 3;
+
         readonly Player player1 = new();
         readonly Player player2 = new();
 
@@ -135,6 +137,26 @@ namespace TicTacToeLibrary
             return false;
         }
 
+        private bool IterativeCheckWinner(Player pg)
+        {
+            Symbol?[,] matrix = grid.GetGrid();
+            int count = 0;
+
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                for (int j = 0; j < MaxGridSize; j++)
+                {
+                    if (matrix[i, j] == pg.Symbol && matrix[i, j] == pg.Symbol)
+                    {
+                        Console.WriteLine("llllllllllllllllll");
+                    }
+                }
+            }
+
+      
+            return false;
+        }
+
         // TODO: RE-WRITE METHOD
         public void StartGame(Player o1, Player o2)
         {
@@ -160,10 +182,9 @@ namespace TicTacToeLibrary
                             grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
                             grid.PrintGrid();
 
-                            if (CheckWinner())
+                            if (IterativeCheckWinner(firstPlayer))
                             {
                                 Console.WriteLine("WIN");
-                                Environment.Exit(0);
                             }
                         }
                         catch (ArgumentException e)
