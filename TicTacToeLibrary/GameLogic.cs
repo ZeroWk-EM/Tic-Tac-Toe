@@ -140,16 +140,16 @@ namespace TicTacToeLibrary
         private bool IterativeCheckWinner(Player pg)
         {
             Symbol?[,] matrix = grid.GetGrid();
-            int count = 0;
 
             for (int i = 0; i < MaxGridSize; i++)
             {
                 for (int j = 0; j < MaxGridSize; j++)
                 {
-                    if (matrix[i, j] == pg.Symbol && matrix[i, j] == pg.Symbol)
-                    {
-                        Console.WriteLine("llllllllllllllllll");
-                    }
+                    // ROW
+
+                    // COLUMN
+
+                    //DIAG
                 }
             }
 
