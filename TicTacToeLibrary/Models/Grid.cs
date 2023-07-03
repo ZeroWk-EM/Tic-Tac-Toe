@@ -46,20 +46,11 @@ namespace TicTacToeLibrary.Models
             return _gameGrid[row, column] != null;
         }
 
-        public static bool IsOut(int row, int column)
-        {
-            return row >= MaxGridSize || column >= MaxGridSize;
-        }
-
         public void InsertSymbol(Symbol? symbol, int row, int column)
         {
             if (IsFilled(row, column))
             {
                 throw new ArgumentException("Cell already filled");
-            }
-            if (IsOut(row, column))
-            {
-                throw new ArgumentException("Exceed matrix bounds");
             }
             _gameGrid[row, column] = symbol;
         }
