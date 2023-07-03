@@ -135,6 +135,7 @@ namespace TicTacToeLibrary
             return false;
         }
 
+        // TODO: RE-WRITE METHOD
         public void StartGame(Player o1, Player o2)
         {
             Player firstPlayer = o1;
