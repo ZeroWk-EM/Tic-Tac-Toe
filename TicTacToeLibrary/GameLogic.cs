@@ -140,25 +140,8 @@ namespace TicTacToeLibrary
         {
             Player firstPlayer = o1;
             Player secondPlayer = o2;
-
             do
             {
-
-                Console.Write(String.Format("PG 1 [{0}]", player1.Symbol));
-                Console.WriteLine(String.Format(" PG 2 [{0}]", player2.Symbol));
-                Console.WriteLine(String.Format("Selected Game Mode [{0}]\n", _gameMode));
-                Console.WriteLine("===========");
-                Console.WriteLine("7 - [0,0]");
-                Console.WriteLine("8 - [0,1]");
-                Console.WriteLine("9 - [0,2]");
-                Console.WriteLine("4 - [1,0]");
-                Console.WriteLine("5 - [1,1]");
-                Console.WriteLine("6 - [1,2]");
-                Console.WriteLine("1 - [2,0]");
-                Console.WriteLine("2 - [2,1]");
-                Console.WriteLine("3 - [2,2]");
-                Console.WriteLine("===========");
-
                 Console.Write("Player Do wanna put the symbol: ");
 
                 Console.Write("\nEnter row: ");
@@ -174,9 +157,6 @@ namespace TicTacToeLibrary
                         try
                         {
                             // DEBUG
-                            Console.WriteLine(grid.IsFilled(resultRow, resultColumn));
-                            Console.WriteLine(Grid.IsOut(resultRow, resultColumn));
-
                             grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
                             grid.PrintGrid();
 
@@ -186,9 +166,13 @@ namespace TicTacToeLibrary
                                 Environment.Exit(0);
                             }
                         }
-                        catch (Exception e)
+                        catch (ArgumentException e)
                         {
                             Console.WriteLine(e.Message);
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+                            Console.WriteLine("Exceed matrix bounds");
                         }
                     }
                 }
