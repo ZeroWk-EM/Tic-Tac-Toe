@@ -98,44 +98,32 @@ namespace TicTacToeLibrary
             return (true, null, null);
         }
 
-        // TODO: RE-WRITE CONDITION
-        private bool CheckWinner()
+
+        private bool CheckWinner(Player pg)
         {
             Symbol?[,] matrix = grid.GetGrid();
 
             //RIGHE COLONNE DIAGONALI
 
             if (
-             (matrix[0, 0] == Symbol.X && matrix[0, 1] == Symbol.X && matrix[0, 2] == Symbol.X) ||
-             (matrix[1, 0] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[1, 2] == Symbol.X) ||
-             (matrix[2, 0] == Symbol.X && matrix[2, 1] == Symbol.X && matrix[2, 2] == Symbol.X) ||
+             (matrix[0, 0] == pg.Symbol && matrix[0, 1] == pg.Symbol && matrix[0, 2] == pg.Symbol) ||
+             (matrix[1, 0] == pg.Symbol && matrix[1, 1] == pg.Symbol && matrix[1, 2] == pg.Symbol) ||
+             (matrix[2, 0] == pg.Symbol && matrix[2, 1] == pg.Symbol && matrix[2, 2] == pg.Symbol) ||
 
-             (matrix[0, 0] == Symbol.X && matrix[1, 0] == Symbol.X && matrix[2, 0] == Symbol.X) ||
-             (matrix[0, 1] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[2, 1] == Symbol.X) ||
-             (matrix[0, 2] == Symbol.X && matrix[1, 2] == Symbol.X && matrix[2, 2] == Symbol.X) ||
+             (matrix[0, 0] == pg.Symbol && matrix[1, 0] == pg.Symbol && matrix[2, 0] == pg.Symbol) ||
+             (matrix[0, 1] == pg.Symbol && matrix[1, 1] == pg.Symbol && matrix[2, 1] == pg.Symbol) ||
+             (matrix[0, 2] == pg.Symbol && matrix[1, 2] == pg.Symbol && matrix[2, 2] == pg.Symbol) ||
 
-             (matrix[0, 0] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[2, 2] == Symbol.X) ||
-             (matrix[0, 2] == Symbol.X && matrix[1, 1] == Symbol.X && matrix[2, 0] == Symbol.X))
+             (matrix[0, 0] == pg.Symbol && matrix[1, 1] == pg.Symbol && matrix[2, 2] == pg.Symbol) ||
+             (matrix[0, 2] == pg.Symbol && matrix[1, 1] == pg.Symbol && matrix[2, 0] == pg.Symbol))
             {
                 return true;
             }
-            else if (
-             (matrix[0, 0] == Symbol.O && matrix[0, 1] == Symbol.O && matrix[0, 2] == Symbol.O) ||
-             (matrix[1, 0] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[1, 2] == Symbol.O) ||
-
-             (matrix[2, 0] == Symbol.O && matrix[2, 1] == Symbol.O && matrix[2, 2] == Symbol.O) ||
-
-             (matrix[0, 0] == Symbol.O && matrix[1, 0] == Symbol.O && matrix[2, 0] == Symbol.O) ||
-             (matrix[0, 1] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[2, 1] == Symbol.O) ||
-             (matrix[0, 2] == Symbol.O && matrix[1, 2] == Symbol.O && matrix[2, 2] == Symbol.O) ||
-
-             (matrix[0, 0] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[2, 2] == Symbol.O) ||
-             (matrix[0, 2] == Symbol.O && matrix[1, 1] == Symbol.O && matrix[2, 0] == Symbol.O))
-            {
-                return true;
-            }
+            
             return false;
         }
+
+        // TODO: FIX IterativeCheckWinner CONDITION
 
         private bool IterativeCheckWinner(Player pg)
         {
@@ -157,7 +145,7 @@ namespace TicTacToeLibrary
             return false;
         }
 
-        // TODO: RE-WRITE METHOD
+        // TODO: RE-WRITE StartGame METHOD
         public void StartGame(Player o1, Player o2)
         {
             Player firstPlayer = o1;
@@ -182,7 +170,7 @@ namespace TicTacToeLibrary
                             grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
                             grid.PrintGrid();
 
-                            if (IterativeCheckWinner(firstPlayer))
+                            if (CheckWinner(firstPlayer))
                             {
                                 Console.WriteLine("WIN");
                             }
