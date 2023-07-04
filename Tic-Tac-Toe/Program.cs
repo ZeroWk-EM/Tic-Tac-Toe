@@ -109,6 +109,9 @@ internal class Program
                                 PrintGameGrid(gm.Grid.GetGrid());
                                 if (gm.CheckWinner(first))
                                 {
+                                    Console.WriteLine("===== DEBUG =====");
+                                    gm.IterativeCheckWinner(first);
+                                    Console.WriteLine("=================");
                                     Console.WriteLine($"WIN {first.Symbol}");
                                     first.IsWinner = true;
                                 }
