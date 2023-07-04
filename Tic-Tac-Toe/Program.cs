@@ -89,7 +89,8 @@ internal class Program
             bool firstTurn = true;
             do
             {
-                Console.WriteLine($"\nFirst [{first.Symbol}]\nSecond [{second.Symbol}]");
+
+                Console.WriteLine($"\nFirst [{first!.Symbol}]\nSecond [{second!.Symbol}]");
                 Console.Write("Player Do wanna put the symbol: ");
                 Console.Write("\nEnter row: ");
                 string? rowChoice = Console.ReadLine();
@@ -140,7 +141,10 @@ internal class Program
                     }
                 }
             } while (!(first.IsWinner || second.IsWinner) && turn < 9);
-            Console.WriteLine("Draw!!");
+            if (turn == 9)
+            {
+                Console.WriteLine("Draw!!");
+            }
         } while (preMatch);
 
         Console.WriteLine("DEBUG - OUT ALL CYCLE");
