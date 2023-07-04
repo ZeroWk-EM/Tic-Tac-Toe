@@ -24,6 +24,7 @@ internal class Program
     static public void Main()
     {
         GameLogic gm = new();
+        int turn = 0;
 
         // SELECT GAMEMODE LOOP
         bool gameModeLoop = true;
@@ -112,6 +113,8 @@ internal class Program
                                     first.IsWinner = true;
                                 }
                                 firstTurn = false;
+                                turn++;
+                                Console.WriteLine($"\nDEBUG - Turn counter [{turn}]");
                             }
                             else
                             {
@@ -123,18 +126,23 @@ internal class Program
                                     second.IsWinner = true;
                                 }
                                 firstTurn = true;
+                                turn++;
+                                Console.WriteLine($"\nDEBUG - Turn counter [{turn}]");
+
                             }
 
                         }
                         catch (ArgumentException e)
                         {
+                            Console.WriteLine($"\nDEBUG - Turn counter into catch [{turn}]");
                             Console.WriteLine(e.Message);
                         }
                     }
                 }
-            } while (!(first.IsWinner || second.IsWinner));
+            } while (!(first.IsWinner || second.IsWinner) && turn < 9);
+            Console.WriteLine("Draw!!");
         } while (preMatch);
 
-        Console.WriteLine("OUT ALL CYCLE");
+        Console.WriteLine("DEBUG - OUT ALL CYCLE");
     }
 }
