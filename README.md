@@ -18,7 +18,7 @@
 - [X] Rimuovere la property che restituisce la griglia
 - [X] Creare una funzione che restituisca la copia della griglia 
 - [X] Utilizzare le costanti
-- [ ] Spostare il metodo PrintGrid su Program.cs
+- [X] Spostare il metodo PrintGrid su Program.cs
 
 #### Tips
 
