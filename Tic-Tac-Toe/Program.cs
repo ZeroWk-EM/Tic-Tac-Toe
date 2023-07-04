@@ -1,6 +1,5 @@
 ﻿using TicTacToeLibrary;
 using TicTacToeLibrary.Enum;
-using TicTacToeLibrary.Models;
 
 namespace Tic_Tac_Toe;
 
