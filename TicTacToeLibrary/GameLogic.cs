@@ -118,10 +118,8 @@ namespace TicTacToeLibrary
             {
                 return true;
             }
-
             return false;
         }
-
         // TODO: FIX IterativeCheckWinner CONDITION
     }
 }
