@@ -107,11 +107,11 @@ internal class Program
                             {
                                 gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
                                 PrintGameGrid(gm.Grid.GetGrid());
-                                if (gm.CheckWinner(first))
+                                if (gm.IterativeCheckWinner(first))
                                 {
-                                    Console.WriteLine("===== DEBUG =====");
+                                    /*Console.WriteLine("===== DEBUG =====");
                                     gm.IterativeCheckWinner(first);
-                                    Console.WriteLine("=================");
+                                    Console.WriteLine("=================");*/
                                     Console.WriteLine($"WIN {first.Symbol}");
                                     first.IsWinner = true;
                                 }
@@ -123,8 +123,11 @@ internal class Program
                             {
                                 gm.Grid.InsertSymbol(second.Symbol, resultRow, resultColumn);
                                 PrintGameGrid(gm.Grid.GetGrid());
-                                if (gm.CheckWinner(second))
+                                if (gm.IterativeCheckWinner(second))
                                 {
+                                  /*  Console.WriteLine("===== DEBUG =====");
+                                    gm.IterativeCheckWinner(second);
+                                    Console.WriteLine("=================");*/
                                     Console.WriteLine($"WIN {second.Symbol}");
                                     second.IsWinner = true;
                                 }

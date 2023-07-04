@@ -120,38 +120,27 @@ namespace TicTacToeLibrary
             }
             return false;
         }
-        // TODO: Create IterativeCheckWinner CONDITION
-        public void IterativeCheckWinner(Player pg)
+
+        // TODO: FIX ERROR
+        public bool IterativeCheckWinner(Player pg)
         {
+            int count = 0;
             Symbol?[,] matrix = grid.GetGrid();
 
             for (int i = 0; i < MaxGridSize; i++)
             {
-               
+
                 for (int j = 0; j < MaxGridSize; j++)
                 {
-                 
+                    Console.WriteLine($"Pos [{i},{j}] - [{matrix[i, j] == pg.Symbol}]");
+                    // ERROR - THIS DON'T CHECK IF IS IN THE SAME ROW/COLUMN 
+                    if (matrix[i, j] == pg.Symbol)
+                    {
+                        count++;
+                    }
                 }
             }
-
-         
+            return count == 3;
         }
-
-
-
-       /* public void IterativeCheckWinner(Player pg)
-        {
-            Symbol?[,] matrix = grid.GetGrid();
-
-            for (int i = 0; i < MaxGridSize; i++)
-            {
-                Console.WriteLine($"Column [{i}]- [{matrix[i, 0] == pg.Symbol}] ");
-            }
-
-            for (int i = 0; i < MaxGridSize; i++)
-            {
-                Console.WriteLine($"Row [{i}]- [{matrix[0, i] == pg.Symbol}] ");
-            }
-        }*/
     }
 }
