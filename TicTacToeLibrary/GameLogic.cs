@@ -120,6 +120,6 @@ namespace TicTacToeLibrary
             }
             return false;
         }
-        // TODO: FIX IterativeCheckWinner CONDITION
+        // TODO: Create IterativeCheckWinner CONDITION
     }
 }
