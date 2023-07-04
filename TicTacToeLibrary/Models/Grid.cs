@@ -31,7 +31,7 @@ namespace TicTacToeLibrary.Models
             return (!IsOut(row, column)) && (_gameGrid[row, column] != null);
         }
 
-        public bool IsOut(int row, int column)
+        public static bool IsOut(int row, int column)
         {
             return row >= MaxGridSize || column >= MaxGridSize;
         }
