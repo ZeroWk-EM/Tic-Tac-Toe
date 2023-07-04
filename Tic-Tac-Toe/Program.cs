@@ -1,9 +1,24 @@
 ﻿using TicTacToeLibrary;
+using TicTacToeLibrary.Enum;
 
 namespace Tic_Tac_Toe;
 
 internal class Program
 {
+    public static void PrintGameGrid(Symbol?[,] grid)
+    {
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                Console.Write(String.Format("[{0}]", grid[i, j]));
+            }
+            Console.WriteLine();
+        }
+    }
+
+
     // Main Method
     static public void Main()
     {
@@ -70,6 +85,7 @@ internal class Program
             }
             Console.Clear();
             Console.WriteLine($"First [{first.Symbol}]\nSecond [{second.Symbol}]");
+            PrintGameGrid(gm.Grid.GetGrid());
             gm.StartGame(first, second);
         } while (preMatch);
 
