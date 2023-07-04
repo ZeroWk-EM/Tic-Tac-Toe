@@ -121,5 +121,37 @@ namespace TicTacToeLibrary
             return false;
         }
         // TODO: Create IterativeCheckWinner CONDITION
+        public void IterativeCheckWinner(Player pg)
+        {
+            Symbol?[,] matrix = grid.GetGrid();
+
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+               
+                for (int j = 0; j < MaxGridSize; j++)
+                {
+                 
+                }
+            }
+
+         
+        }
+
+
+
+       /* public void IterativeCheckWinner(Player pg)
+        {
+            Symbol?[,] matrix = grid.GetGrid();
+
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                Console.WriteLine($"Column [{i}]- [{matrix[i, 0] == pg.Symbol}] ");
+            }
+
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                Console.WriteLine($"Row [{i}]- [{matrix[0, i] == pg.Symbol}] ");
+            }
+        }*/
     }
 }
