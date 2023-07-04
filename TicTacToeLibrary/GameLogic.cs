@@ -119,7 +119,7 @@ namespace TicTacToeLibrary
             {
                 return true;
             }
-            
+
             return false;
         }
 
@@ -141,11 +141,11 @@ namespace TicTacToeLibrary
                 }
             }
 
-      
+
             return false;
         }
 
-        // TODO: RE-WRITE StartGame METHOD
+        // TODO: RE-WRITE StartGame METHOD (Turn )
         public void StartGame(Player o1, Player o2)
         {
             Player firstPlayer = o1;
@@ -166,23 +166,24 @@ namespace TicTacToeLibrary
                     {
                         try
                         {
+                            Console.WriteLine($"E' Fuori della matrice [{grid.IsOut(resultRow, resultColumn)}]");
+                            Console.WriteLine($"La cella e' già piena [{grid.IsFilled(resultRow, resultColumn)}]");
                             // DEBUG
                             grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
                             grid.PrintGrid();
-
                             if (CheckWinner(firstPlayer))
                             {
                                 Console.WriteLine("WIN");
                             }
                         }
+                     /* catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }*/
                         catch (ArgumentException e)
                         {
                             Console.WriteLine(e.Message);
-                        }
-                        catch (IndexOutOfRangeException)
-                        {
-                            Console.WriteLine("Exceed matrix bounds");
-                        }
+                        } 
                     }
                 }
 
