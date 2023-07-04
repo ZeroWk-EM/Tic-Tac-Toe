@@ -100,13 +100,10 @@ namespace TicTacToeLibrary
             return (true, null, null);
         }
 
-
-        private bool CheckWinner(Player pg)
+        public bool CheckWinner(Player pg)
         {
             Symbol?[,] matrix = grid.GetGrid();
-
             //RIGHE COLONNE DIAGONALI
-
             if (
              (matrix[0, 0] == pg.Symbol && matrix[0, 1] == pg.Symbol && matrix[0, 2] == pg.Symbol) ||
              (matrix[1, 0] == pg.Symbol && matrix[1, 1] == pg.Symbol && matrix[1, 2] == pg.Symbol) ||
@@ -126,69 +123,5 @@ namespace TicTacToeLibrary
         }
 
         // TODO: FIX IterativeCheckWinner CONDITION
-
-        private bool IterativeCheckWinner(Player pg)
-        {
-            Symbol?[,] matrix = grid.GetGrid();
-
-            for (int i = 0; i < MaxGridSize; i++)
-            {
-                for (int j = 0; j < MaxGridSize; j++)
-                {
-                    // ROW
-
-                    // COLUMN
-
-                    //DIAG
-                }
-            }
-
-
-            return false;
-        }
-
-        // TODO: RE-WRITE StartGame METHOD (Turn )
-        public void StartGame(Player o1, Player o2)
-        {
-            Player firstPlayer = o1;
-            Player secondPlayer = o2;
-            do
-            {
-                Console.Write("Player Do wanna put the symbol: ");
-
-                Console.Write("\nEnter row: ");
-                string? rowChoice = Console.ReadLine();
-
-                if (int.TryParse(rowChoice, out int resultRow))
-                {
-                    Console.Write("\nEnter column: ");
-                    string? columnChoice = Console.ReadLine();
-
-                    if (int.TryParse(columnChoice, out int resultColumn))
-                    {
-                        try
-                        {
-                            Console.WriteLine($"E' Fuori della matrice [{grid.IsOut(resultRow, resultColumn)}]");
-                            Console.WriteLine($"La cella e' già piena [{grid.IsFilled(resultRow, resultColumn)}]");
-                            // DEBUG
-                            grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
-                            if (CheckWinner(firstPlayer))
-                            {
-                                Console.WriteLine("WIN");
-                            }
-                        }
-                        /* catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }*/
-                        catch (ArgumentException e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    }
-                }
-
-            } while (!(firstPlayer.IsWinner || secondPlayer.IsWinner));
-        }
     }
 }
