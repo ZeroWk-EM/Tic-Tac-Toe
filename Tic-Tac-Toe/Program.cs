@@ -1,9 +1,25 @@
 ﻿using TicTacToeLibrary;
+using TicTacToeLibrary.Enum;
+using TicTacToeLibrary.Models;
 
 namespace Tic_Tac_Toe;
 
 internal class Program
 {
+    public static void PrintGameGrid(Symbol?[,] grid)
+    {
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                Console.Write(String.Format("[{0}]", grid[i, j]));
+            }
+            Console.WriteLine();
+        }
+    }
+
+
     // Main Method
     static public void Main()
     {
@@ -68,8 +84,55 @@ internal class Program
                     }
                 } while (selectSymbolLoop);
             }
-    Console.Write($"First {first}\nSecond {second}");
-            gm.StartGame(first, second);
+            // MATCH
+            bool firstTurn = true;
+            do
+            {
+                Console.WriteLine($"\nFirst [{first.Symbol}]\nSecond [{second.Symbol}]");
+                Console.Write("Player Do wanna put the symbol: ");
+                Console.Write("\nEnter row: ");
+                string? rowChoice = Console.ReadLine();
+
+                if (int.TryParse(rowChoice, out int resultRow))
+                {
+                    Console.Write("\nEnter column: ");
+                    string? columnChoice = Console.ReadLine();
+
+                    if (int.TryParse(columnChoice, out int resultColumn))
+                    {
+                        try
+                        {
+                            if (firstTurn)
+                            {
+                                gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
+                                PrintGameGrid(gm.Grid.GetGrid());
+                                if (gm.CheckWinner(first))
+                                {
+                                    Console.WriteLine($"WIN {first.Symbol}");
+                                    first.IsWinner = true;
+                                }
+                                firstTurn = false;
+                            }
+                            else
+                            {
+                                gm.Grid.InsertSymbol(second.Symbol, resultRow, resultColumn);
+                                PrintGameGrid(gm.Grid.GetGrid());
+                                if (gm.CheckWinner(second))
+                                {
+                                    Console.WriteLine($"WIN {second.Symbol}");
+                                    second.IsWinner = true;
+                                }
+                                firstTurn = true;
+                            }
+
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
+                }
+            } while (!(first.IsWinner || second.IsWinner));
         } while (preMatch);
 
         Console.WriteLine("OUT ALL CYCLE");

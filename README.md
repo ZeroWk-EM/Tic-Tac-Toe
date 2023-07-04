@@ -7,8 +7,8 @@
 - [X] Input in the player case must be via keyboard input by typing the cell number you want to fill in
 
 ### Task
-- [ ] RISCRIVERE LA LOGICA DEI TURNI SU STARTGAME()
-- [ ] Spostare i Console.WriteLine() & Console.ReadLine() su Program.cs
+- [X] Riscrivere la logica dei turni
+- [X] Spostare i Console.WriteLine() & Console.ReadLine() su Program.cs
 - [ ] Rendere Iterativo il controllo della vittoria
 	- [X] Nel controllo usere le ENUM
 - [X] Inserimento dei dati della  matrice da tastiera (ES. 1,1 lo andrà a mettere al centro)
@@ -18,7 +18,7 @@
 - [X] Rimuovere la property che restituisce la griglia
 - [X] Creare una funzione che restituisca la copia della griglia 
 - [X] Utilizzare le costanti
-- [ ] Sposare il metodo PrintGrid su Program.cs
+- [X] Spostare il metodo PrintGrid su Program.cs
 
 #### Tips
 
