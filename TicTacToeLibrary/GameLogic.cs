@@ -28,6 +28,8 @@ namespace TicTacToeLibrary
             private set { _turnOrder = value; }
         }
 
+        public Grid Grid { get { return grid; } }
+
         // For select the symbol OK
         public static bool SelectSymbol(string choicePG, Player pg1, Player pg2)
         {
@@ -170,20 +172,19 @@ namespace TicTacToeLibrary
                             Console.WriteLine($"La cella e' già piena [{grid.IsFilled(resultRow, resultColumn)}]");
                             // DEBUG
                             grid.InsertSymbol(firstPlayer.Symbol, resultRow, resultColumn);
-                            grid.PrintGrid();
                             if (CheckWinner(firstPlayer))
                             {
                                 Console.WriteLine("WIN");
                             }
                         }
-                     /* catch (Exception e)
+                        /* catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
                         }*/
                         catch (ArgumentException e)
                         {
                             Console.WriteLine(e.Message);
-                        } 
+                        }
                     }
                 }
 
