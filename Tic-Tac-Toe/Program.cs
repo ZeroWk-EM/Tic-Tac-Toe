@@ -85,9 +85,10 @@ internal class Program
                 } while (selectSymbolLoop);
             }
             // MATCH
+            bool firstTurn = true;
             do
             {
-                Console.WriteLine($"First [{first.Symbol}]\nSecond [{second.Symbol}]");
+                Console.WriteLine($"\nFirst [{first.Symbol}]\nSecond [{second.Symbol}]");
                 Console.Write("Player Do wanna put the symbol: ");
                 Console.Write("\nEnter row: ");
                 string? rowChoice = Console.ReadLine();
@@ -101,14 +102,29 @@ internal class Program
                     {
                         try
                         {
-                            /*Console.WriteLine($"E' Fuori della matrice [{gm.Grid.IsOut(resultRow, resultColumn)}]");
-                            Console.WriteLine($"La cella e' già piena [{gm.Grid.IsFilled(resultRow, resultColumn)}]");*/
-                            gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
-                            PrintGameGrid(gm.Grid.GetGrid());
-                            if (gm.CheckWinner(first))
+                            if (firstTurn)
                             {
-                                Console.WriteLine("WIN");
+                                gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
+                                PrintGameGrid(gm.Grid.GetGrid());
+                                if (gm.CheckWinner(first))
+                                {
+                                    Console.WriteLine($"WIN {first.Symbol}");
+                                    first.IsWinner = true;
+                                }
+                                firstTurn = false;
                             }
+                            else
+                            {
+                                gm.Grid.InsertSymbol(second.Symbol, resultRow, resultColumn);
+                                PrintGameGrid(gm.Grid.GetGrid());
+                                if (gm.CheckWinner(second))
+                                {
+                                    Console.WriteLine($"WIN {second.Symbol}");
+                                    second.IsWinner = true;
+                                }
+                                firstTurn = true;
+                            }
+
                         }
                         catch (ArgumentException e)
                         {
