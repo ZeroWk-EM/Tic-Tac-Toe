@@ -13,7 +13,6 @@ namespace TicTacToeLibrary.Models
 
         }
 
-        // Create a copy of game grid
         public Symbol?[,] GetGrid()
         {
             Symbol?[,] matrix = new Symbol?[MaxGridSize, MaxGridSize];
@@ -27,24 +26,9 @@ namespace TicTacToeLibrary.Models
             return matrix;
         }
 
-        // TODO: MOVE TO PROGRAM.CS
-        public void PrintGrid()
-        {
-            Symbol?[,] grid = GetGrid();
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-
-                    Console.Write(String.Format("[{0}]", grid[i, j]));
-                }
-                Console.WriteLine();
-            }
-        }
-
         public bool IsFilled(int row, int column)
         {
-            return _gameGrid[row, column] != null;
+            return (!IsOut(row, column)) && (_gameGrid[row, column] != null);
         }
 
         public bool IsOut(int row, int column)
@@ -54,14 +38,14 @@ namespace TicTacToeLibrary.Models
 
         public void InsertSymbol(Symbol? symbol, int row, int column)
         {
-            if (IsFilled(row, column))
-            {
-                throw new ArgumentException("Cell already filled");
-            }
-
             if (IsOut(row, column))
             {
                 throw new ArgumentException("Exceed matrix bounds");
+            }
+
+            if (IsFilled(row, column))
+            {
+                throw new ArgumentException("Cell already filled");
             }
             _gameGrid[row, column] = symbol;
         }
