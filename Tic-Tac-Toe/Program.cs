@@ -1,5 +1,6 @@
 ﻿using TicTacToeLibrary;
 using TicTacToeLibrary.Enum;
+using TicTacToeLibrary.Models;
 
 namespace Tic_Tac_Toe;
 
@@ -83,10 +84,39 @@ internal class Program
                     }
                 } while (selectSymbolLoop);
             }
-            Console.Clear();
-            Console.WriteLine($"First [{first.Symbol}]\nSecond [{second.Symbol}]");
-            PrintGameGrid(gm.Grid.GetGrid());
-            gm.StartGame(first, second);
+            // MATCH
+            do
+            {
+                Console.WriteLine($"First [{first.Symbol}]\nSecond [{second.Symbol}]");
+                Console.Write("Player Do wanna put the symbol: ");
+                Console.Write("\nEnter row: ");
+                string? rowChoice = Console.ReadLine();
+
+                if (int.TryParse(rowChoice, out int resultRow))
+                {
+                    Console.Write("\nEnter column: ");
+                    string? columnChoice = Console.ReadLine();
+
+                    if (int.TryParse(columnChoice, out int resultColumn))
+                    {
+                        try
+                        {
+                            /*Console.WriteLine($"E' Fuori della matrice [{gm.Grid.IsOut(resultRow, resultColumn)}]");
+                            Console.WriteLine($"La cella e' già piena [{gm.Grid.IsFilled(resultRow, resultColumn)}]");*/
+                            gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
+                            PrintGameGrid(gm.Grid.GetGrid());
+                            if (gm.CheckWinner(first))
+                            {
+                                Console.WriteLine("WIN");
+                            }
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
+                }
+            } while (!(first.IsWinner || second.IsWinner));
         } while (preMatch);
 
         Console.WriteLine("OUT ALL CYCLE");
