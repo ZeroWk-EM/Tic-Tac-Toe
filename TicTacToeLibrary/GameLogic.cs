@@ -6,7 +6,6 @@ namespace TicTacToeLibrary
 {
     public class GameLogic
     {
-        public const int MaxGridSize = 3;
 
         readonly Player player1 = new();
         readonly Player player2 = new();
@@ -15,6 +14,8 @@ namespace TicTacToeLibrary
         private Player[] _turnOrder = new Player[2];
 
         readonly Grid grid = new();
+
+        public const int MaxGridSize = Grid.MaxGridSize;
 
         public string GameMode
         {
@@ -181,27 +182,16 @@ namespace TicTacToeLibrary
         }*/
 
         //V3
-        public bool IterativeCheckWinner(Player pg)
+        /*public bool IterativeCheckWinner(Player pg)
         {
             int count = 0;
             Symbol?[,] matrix = grid.GetGrid();
-
+            bool found = false;
             for (int i = 0; i < MaxGridSize; i++)
             {
                 for (int j = 0; j < MaxGridSize; j++)
                 {
-                    Console.WriteLine($"COLUMN - {matrix[0, j] == pg.Symbol}");
-                    // COLUMN
-                    if (matrix[0, j] == pg.Symbol)
-                    {
-                        Console.WriteLine("\nControllo colonne");
-                        Console.WriteLine($"Pos [{i},{j}]");
-                        Console.WriteLine($"Count {count}");
-                        count++;
-                    }
-               
-                    // ROW
-                    Console.WriteLine($"ROW - {matrix[i, 0] == pg.Symbol}");
+                    // ROW         
                     if (matrix[i, 0] == pg.Symbol)
                     {
                         Console.WriteLine("\nControllo righe");
@@ -209,10 +199,37 @@ namespace TicTacToeLibrary
                         Console.WriteLine($"Count {count}");
                         count++;
                     }
-             
+
+                    if (found == false)
+                    {
+                        // COLUMN
+                        if (matrix[0, j] == pg.Symbol)
+                        {
+                            Console.WriteLine("\nControllo colonne");
+                            Console.WriteLine($"Pos [{i},{j}]");
+                            Console.WriteLine($"Count {count}");
+                            count++;
+                            found = true;
+                            break;
+                        }
+                    }
                 }
             }
             return count == MaxGridSize;
+        }*/
+
+        public bool IterativeCheckWinner(Player pg)
+        {
+            Symbol?[,] matrix = grid.GetGrid();
+
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                for (int j = 0; j < MaxGridSize; j++)
+                {
+
+                }
+            }
+            return false;
         }
     }
 }

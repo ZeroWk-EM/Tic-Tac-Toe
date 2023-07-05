@@ -1,18 +1,19 @@
 ﻿using TicTacToeLibrary;
 using TicTacToeLibrary.Enum;
+using TicTacToeLibrary.Models;
 
 namespace Tic_Tac_Toe;
 
 internal class Program
 {
-    public static void PrintGameGrid(Symbol?[,] grid)
+    public static void PrintGameGrid(Symbol?[,] matrix)
     {
-
-        for (int i = 0; i < 3; i++)
+        const int MaxGridSize = Grid.MaxGridSize;
+        for (int i = 0; i < MaxGridSize; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < MaxGridSize; j++)
             {
-                Console.Write(String.Format("[{0}]", grid[i, j]));
+                Console.Write(String.Format("[{0}]", matrix[i, j]));
             }
             Console.WriteLine();
         }
@@ -23,6 +24,7 @@ internal class Program
     {
         GameLogic gm = new();
         int turn = 0;
+        int maxturn = Grid.MaxGridSize * Grid.MaxGridSize;
 
         // SELECT GAMEMODE LOOP
         bool gameModeLoop = true;
@@ -106,12 +108,12 @@ internal class Program
                             {
                                 gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
                                 PrintGameGrid(gm.Grid.GetGrid());
-                                if (gm.CheckWinner(first))
+                                if (gm.IterativeCheckWinner(first))
                                 {
-                                    Console.WriteLine("===== DEBUG =====");
-                                    gm.IterativeCheckWinner
-                                    (first);
-                                    Console.WriteLine("=================");
+                                    /*     Console.WriteLine("===== DEBUG =====");
+                                         gm.IterativeCheckWinner
+                                         (first);
+                                         Console.WriteLine("=================");*/
                                     Console.WriteLine($"WIN {first.Symbol}");
                                     first.IsWinner = true;
                                 }
@@ -145,8 +147,8 @@ internal class Program
                         }
                     }
                 }
-            } while (!(first.IsWinner || second.IsWinner) && turn < 9);
-            if (turn == 9)
+            } while (!(first.IsWinner || second.IsWinner) && turn < maxturn);
+            if (turn == maxturn)
             {
                 Console.WriteLine("Draw!!");
             }
