@@ -122,6 +122,65 @@ namespace TicTacToeLibrary
         }
 
         // TODO: FIX ERROR
+
+        // V1
+        /*       public bool IterativeCheckWinner(Player pg)
+               {
+                   int count = 0;
+                   Symbol?[,] matrix = grid.GetGrid();
+
+                   for (int i = 0; i < MaxGridSize; i++)
+                   {
+
+                       for (int j = 0; j < MaxGridSize; j++)
+                       {
+                           Console.WriteLine($"Pos [{i},{j}] - [{matrix[i, j] == pg.Symbol}]");
+                           // ERROR - THIS DON'T CHECK IF IS IN THE SAME ROW/COLUMN 
+                           if (matrix[i, j] == pg.Symbol)
+                           {
+                               count++;
+                           }
+                       }
+                   }
+                   return count == 3;
+               }*/
+
+        //V2
+        /*public bool IterativeCheckWinner(Player pg)
+        {
+            int count = 0;
+            Symbol?[,] matrix = grid.GetGrid();
+
+            bool foundRow=false;
+            bool foundColumn = false;
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                for (int j = 0; j < MaxGridSize; j++)
+                {
+                    // COLUMN
+                    if (!foundRow && matrix[0, j] == pg.Symbol)
+                    {
+                        Console.WriteLine("\nControllo colonne");
+                        Console.WriteLine($"Pos [{i},{j}]");
+                        Console.WriteLine($"Count {count}");
+                        count++;
+                        foundColumn = true;
+                    }
+                    // ROW
+                    if (!foundColumn && matrix[i, 0] == pg.Symbol)
+                    {
+                        Console.WriteLine("\nControllo righe");
+                        Console.WriteLine($"Pos [{i},{j}]");
+                        Console.WriteLine($"Count {count}");
+                        count++;
+                        foundRow = true;
+                    }
+                }
+            }
+            return count == 3;
+        }*/
+
+        //V3
         public bool IterativeCheckWinner(Player pg)
         {
             int count = 0;
@@ -129,18 +188,37 @@ namespace TicTacToeLibrary
 
             for (int i = 0; i < MaxGridSize; i++)
             {
-
                 for (int j = 0; j < MaxGridSize; j++)
                 {
-                    Console.WriteLine($"Pos [{i},{j}] - [{matrix[i, j] == pg.Symbol}]");
-                    // ERROR - THIS DON'T CHECK IF IS IN THE SAME ROW/COLUMN 
-                    if (matrix[i, j] == pg.Symbol)
+                    Console.WriteLine($"COLUMN - {matrix[0, j] == pg.Symbol}");
+                    // COLUMN
+                    if (matrix[0, j] == pg.Symbol)
                     {
+                        Console.WriteLine("\nControllo colonne");
+                        Console.WriteLine($"Pos [{i},{j}]");
+                        Console.WriteLine($"Count {count}");
                         count++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    // ROW
+                    Console.WriteLine($"ROW - {matrix[i, 0] == pg.Symbol}");
+                    if (matrix[i, 0] == pg.Symbol)
+                    {
+                        Console.WriteLine("\nControllo righe");
+                        Console.WriteLine($"Pos [{i},{j}]");
+                        Console.WriteLine($"Count {count}");
+                        count++;
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
             }
-            return count == 3;
+            return count == MaxGridSize;
         }
     }
 }

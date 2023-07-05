@@ -18,7 +18,6 @@ internal class Program
         }
     }
 
-
     // Main Method
     static public void Main()
     {
@@ -107,11 +106,12 @@ internal class Program
                             {
                                 gm.Grid.InsertSymbol(first.Symbol, resultRow, resultColumn);
                                 PrintGameGrid(gm.Grid.GetGrid());
-                                if (gm.IterativeCheckWinner(first))
+                                if (gm.CheckWinner(first))
                                 {
-                                    /*Console.WriteLine("===== DEBUG =====");
-                                    gm.IterativeCheckWinner(first);
-                                    Console.WriteLine("=================");*/
+                                    Console.WriteLine("===== DEBUG =====");
+                                    gm.IterativeCheckWinner
+                                    (first);
+                                    Console.WriteLine("=================");
                                     Console.WriteLine($"WIN {first.Symbol}");
                                     first.IsWinner = true;
                                 }
@@ -123,11 +123,11 @@ internal class Program
                             {
                                 gm.Grid.InsertSymbol(second.Symbol, resultRow, resultColumn);
                                 PrintGameGrid(gm.Grid.GetGrid());
-                                if (gm.IterativeCheckWinner(second))
+                                if (gm.CheckWinner(second))
                                 {
-                                  /*  Console.WriteLine("===== DEBUG =====");
+                                    Console.WriteLine("===== DEBUG =====");
                                     gm.IterativeCheckWinner(second);
-                                    Console.WriteLine("=================");*/
+                                    Console.WriteLine("=================");
                                     Console.WriteLine($"WIN {second.Symbol}");
                                     second.IsWinner = true;
                                 }
