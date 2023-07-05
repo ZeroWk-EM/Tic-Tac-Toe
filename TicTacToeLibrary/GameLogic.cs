@@ -199,10 +199,7 @@ namespace TicTacToeLibrary
                         Console.WriteLine($"Count {count}");
                         count++;
                     }
-                    else
-                    {
-                        break;
-                    }
+               
                     // ROW
                     Console.WriteLine($"ROW - {matrix[i, 0] == pg.Symbol}");
                     if (matrix[i, 0] == pg.Symbol)
@@ -212,10 +209,7 @@ namespace TicTacToeLibrary
                         Console.WriteLine($"Count {count}");
                         count++;
                     }
-                    else
-                    {
-                        break;
-                    }
+             
                 }
             }
             return count == MaxGridSize;
