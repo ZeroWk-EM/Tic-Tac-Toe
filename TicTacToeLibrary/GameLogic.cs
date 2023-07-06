@@ -139,7 +139,6 @@ namespace TicTacToeLibrary
                 }
                 if (counter == MaxGridSize)
                 {
-                    //Console.WriteLine("Row WIN");
                     return true;
                 }
             }
@@ -165,7 +164,6 @@ namespace TicTacToeLibrary
                 turn++;
                 if (winnerCount == MaxGridSize)
                 {
-                    // Console.WriteLine("Column WIN");
                     return true;
                 }
                 if (turn < (MaxGridSize * MaxGridSize) && columnCounter == MaxGridSize)
@@ -177,7 +175,7 @@ namespace TicTacToeLibrary
 
             }
 
-            //MAIN DIAG
+            //MAIN DIAG OK
             int mainDiagCounter = 0;
             for (int i = 0; i < MaxGridSize; i++)
             {
@@ -188,12 +186,11 @@ namespace TicTacToeLibrary
                 }
                 if (mainDiagCounter == MaxGridSize)
                 {
-                    //Console.WriteLine("Main Diag WIN");
                     return true;
                 }
             }
 
-            //ANTI-DIAG
+            //ANTI-DIAG OK
             int antiDiagCounter = 0;
             for (int i = 0; i < MaxGridSize; i++)
             {
@@ -204,12 +201,10 @@ namespace TicTacToeLibrary
                 }
                 if (antiDiagCounter == MaxGridSize)
                 {
-                    //Console.WriteLine("Anti Diag WIN");
                     return true;
                 }
             }
 
-            //FINAL
             return false;
         }
     }

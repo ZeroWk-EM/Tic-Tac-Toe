@@ -110,39 +110,27 @@ internal class Program
                                 PrintGameGrid(gm.Grid.GetGrid());
                                 if (gm.IterativeCheckWinner(first))
                                 {
-                                    /*     Console.WriteLine("===== DEBUG =====");
-                                         gm.IterativeCheckWinner
-                                         (first);
-                                         Console.WriteLine("=================");*/
                                     Console.WriteLine($"WIN {first.Symbol}");
                                     first.IsWinner = true;
                                 }
                                 firstTurn = false;
                                 turn++;
-                                Console.WriteLine($"\nDEBUG - Turn counter [{turn}]");
                             }
                             else
                             {
                                 gm.Grid.InsertSymbol(second.Symbol, resultRow, resultColumn);
                                 PrintGameGrid(gm.Grid.GetGrid());
-                                if (gm.CheckWinner(second))
+                                if (gm.IterativeCheckWinner(second))
                                 {
-                                    Console.WriteLine("===== DEBUG =====");
-                                    gm.IterativeCheckWinner(second);
-                                    Console.WriteLine("=================");
                                     Console.WriteLine($"WIN {second.Symbol}");
                                     second.IsWinner = true;
                                 }
                                 firstTurn = true;
                                 turn++;
-                                Console.WriteLine($"\nDEBUG - Turn counter [{turn}]");
-
                             }
-
                         }
                         catch (ArgumentException e)
                         {
-                            Console.WriteLine($"\nDEBUG - Turn counter into catch [{turn}]");
                             Console.WriteLine(e.Message);
                         }
                     }
@@ -150,10 +138,9 @@ internal class Program
             } while (!(first.IsWinner || second.IsWinner) && turn < maxturn);
             if (turn == maxturn)
             {
+                Console.Clear();
                 Console.WriteLine("Draw!!");
             }
         } while (preMatch);
-
-        Console.WriteLine("DEBUG - OUT ALL CYCLE");
     }
 }
