@@ -5,7 +5,7 @@ namespace TicTacToeLibrary.Models
 {
     public class Grid
     {
-        public const int MaxGridSize = 5;
+        public const int MaxGridSize = 3;
         private readonly Symbol?[,] _gameGrid = new Symbol?[MaxGridSize, MaxGridSize];
 
         public Grid()
