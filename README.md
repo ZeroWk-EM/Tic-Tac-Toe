@@ -9,7 +9,7 @@
 ### Task
 - [X] Riscrivere la logica dei turni
 - [X] Spostare i Console.WriteLine() & Console.ReadLine() su Program.cs
-- [ ] Rendere Iterativo il controllo della vittoria
+- [X] Rendere Iterativo il controllo della vittoria
 	- [X] Nel controllo usere le ENUM
 - [X] Inserimento dei dati della  matrice da tastiera (ES. 1,1 lo andrà a mettere al centro)
 	- [X] Controllare che le coordinate inserite siano corrette.
