@@ -193,6 +193,22 @@ namespace TicTacToeLibrary
                 }
             }
 
+            //ANTI-DIAG
+            int antiDiagCounter = 0;
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+
+                if (matrix[i, MaxGridSize - i - 1] == pg.Symbol)
+                {
+                    antiDiagCounter++;
+                }
+                if (antiDiagCounter == MaxGridSize)
+                {
+                    //Console.WriteLine("Anti Diag WIN");
+                    return true;
+                }
+            }
+
             //FINAL
             return false;
         }
