@@ -1,6 +1,4 @@
-﻿
-using System.Diagnostics.Metrics;
-using System.Reflection;
+﻿using System.Diagnostics.Metrics;
 using TicTacToeLibrary.Enum;
 using TicTacToeLibrary.Models;
 
@@ -179,8 +177,21 @@ namespace TicTacToeLibrary
 
             }
 
+            //MAIN DIAG
+            int mainDiagCounter = 0;
+            for (int i = 0; i < MaxGridSize; i++)
+            {
 
-
+                if (matrix[i, i] == pg.Symbol)
+                {
+                    mainDiagCounter++;
+                }
+                if (mainDiagCounter == MaxGridSize)
+                {
+                    //Console.WriteLine("Main Diag WIN");
+                    return true;
+                }
+            }
 
             //FINAL
             return false;
