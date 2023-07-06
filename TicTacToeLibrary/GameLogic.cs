@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics.Metrics;
+using System.Reflection;
 using TicTacToeLibrary.Enum;
 using TicTacToeLibrary.Models;
 
@@ -122,113 +124,65 @@ namespace TicTacToeLibrary
             return false;
         }
 
-        // TODO: FIX ERROR
-
-        // V1
-        /*       public bool IterativeCheckWinner(Player pg)
-               {
-                   int count = 0;
-                   Symbol?[,] matrix = grid.GetGrid();
-
-                   for (int i = 0; i < MaxGridSize; i++)
-                   {
-
-                       for (int j = 0; j < MaxGridSize; j++)
-                       {
-                           Console.WriteLine($"Pos [{i},{j}] - [{matrix[i, j] == pg.Symbol}]");
-                           // ERROR - THIS DON'T CHECK IF IS IN THE SAME ROW/COLUMN 
-                           if (matrix[i, j] == pg.Symbol)
-                           {
-                               count++;
-                           }
-                       }
-                   }
-                   return count == 3;
-               }*/
-
-        //V2
-        /*public bool IterativeCheckWinner(Player pg)
-        {
-            int count = 0;
-            Symbol?[,] matrix = grid.GetGrid();
-
-            bool foundRow=false;
-            bool foundColumn = false;
-            for (int i = 0; i < MaxGridSize; i++)
-            {
-                for (int j = 0; j < MaxGridSize; j++)
-                {
-                    // COLUMN
-                    if (!foundRow && matrix[0, j] == pg.Symbol)
-                    {
-                        Console.WriteLine("\nControllo colonne");
-                        Console.WriteLine($"Pos [{i},{j}]");
-                        Console.WriteLine($"Count {count}");
-                        count++;
-                        foundColumn = true;
-                    }
-                    // ROW
-                    if (!foundColumn && matrix[i, 0] == pg.Symbol)
-                    {
-                        Console.WriteLine("\nControllo righe");
-                        Console.WriteLine($"Pos [{i},{j}]");
-                        Console.WriteLine($"Count {count}");
-                        count++;
-                        foundRow = true;
-                    }
-                }
-            }
-            return count == 3;
-        }*/
-
-        //V3
-        /*public bool IterativeCheckWinner(Player pg)
-        {
-            int count = 0;
-            Symbol?[,] matrix = grid.GetGrid();
-            bool found = false;
-            for (int i = 0; i < MaxGridSize; i++)
-            {
-                for (int j = 0; j < MaxGridSize; j++)
-                {
-                    // ROW         
-                    if (matrix[i, 0] == pg.Symbol)
-                    {
-                        Console.WriteLine("\nControllo righe");
-                        Console.WriteLine($"Pos [{i},{j}]");
-                        Console.WriteLine($"Count {count}");
-                        count++;
-                    }
-
-                    if (found == false)
-                    {
-                        // COLUMN
-                        if (matrix[0, j] == pg.Symbol)
-                        {
-                            Console.WriteLine("\nControllo colonne");
-                            Console.WriteLine($"Pos [{i},{j}]");
-                            Console.WriteLine($"Count {count}");
-                            count++;
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            return count == MaxGridSize;
-        }*/
-
         public bool IterativeCheckWinner(Player pg)
         {
             Symbol?[,] matrix = grid.GetGrid();
 
+            // ROW OK 
             for (int i = 0; i < MaxGridSize; i++)
             {
+                int counter = 0;
                 for (int j = 0; j < MaxGridSize; j++)
                 {
-
+                    if (matrix[i, j] == pg.Symbol)
+                    {
+                        counter++;
+                    }
+                }
+                if (counter == MaxGridSize)
+                {
+                    //Console.WriteLine("Row WIN");
+                    return true;
                 }
             }
+
+            //COLUMN DA OTTIMIZZARE
+            int columnCounter = 0;
+            int column = 0;
+            int turn = 0;
+            int winnerCount = 0;
+            for (int i = 0; i < MaxGridSize; i++)
+            {
+                if (turn < (MaxGridSize * MaxGridSize) && columnCounter == MaxGridSize)
+                {
+                    i = 0;
+                    columnCounter = 0;
+
+                }
+                if (matrix[i, column] == pg.Symbol)
+                {
+                    winnerCount++;
+                }
+                columnCounter++;
+                turn++;
+                if (winnerCount == MaxGridSize)
+                {
+                    // Console.WriteLine("Column WIN");
+                    return true;
+                }
+                if (turn < (MaxGridSize * MaxGridSize) && columnCounter == MaxGridSize)
+                {
+                    column++;
+                    i = 0;
+                    winnerCount = 0;
+                }
+
+            }
+
+
+
+
+            //FINAL
             return false;
         }
     }
