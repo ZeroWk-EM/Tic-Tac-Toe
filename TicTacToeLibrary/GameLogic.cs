@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using TicTacToeLibrary.Enum;
+﻿using TicTacToeLibrary.Enum;
 using TicTacToeLibrary.Models;
 
 namespace TicTacToeLibrary
@@ -104,7 +103,6 @@ namespace TicTacToeLibrary
         public bool CheckWinner(Player pg)
         {
             Symbol?[,] matrix = grid.GetGrid();
-            //RIGHE COLONNE DIAGONALI
             if (
              (matrix[0, 0] == pg.Symbol && matrix[0, 1] == pg.Symbol && matrix[0, 2] == pg.Symbol) ||
              (matrix[1, 0] == pg.Symbol && matrix[1, 1] == pg.Symbol && matrix[1, 2] == pg.Symbol) ||
