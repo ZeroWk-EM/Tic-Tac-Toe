@@ -110,7 +110,7 @@ internal class Program
                                 PrintGameGrid(gm.Grid.GetGrid());
                                 if (gm.IterativeCheckWinner(first))
                                 {
-                                    Console.WriteLine($"WIN {first.Symbol}");
+                                    Console.WriteLine($"WIN {first.Symbol}!");
                                     first.IsWinner = true;
                                 }
                                 firstTurn = false;
@@ -122,7 +122,7 @@ internal class Program
                                 PrintGameGrid(gm.Grid.GetGrid());
                                 if (gm.IterativeCheckWinner(second))
                                 {
-                                    Console.WriteLine($"WIN {second.Symbol}");
+                                    Console.WriteLine($"WIN {second.Symbol}!");
                                     second.IsWinner = true;
                                 }
                                 firstTurn = true;
