@@ -6,19 +6,19 @@
 - [X] Input in the player case must be via keyboard input by typing the cell number you want to fill in
 
 ### Task
-- [X] Riscrivere la logica dei turni
-- [X] Spostare i Console.WriteLine() & Console.ReadLine() su Program.cs
-- [X] Rendere Iterativo il controllo della vittoria
-	- [X] Nel controllo usere le ENUM
-- [X] Inserimento dei dati della  matrice da tastiera (ES. 1,1 lo andrà a mettere al centro)
-	- [X] Controllare che le coordinate inserite siano corrette.
-- [X] Utilizzare le eccezzioni
-- [X] Aggiungere controlli booleani su InsertSymbol e rimuovere i Console.WriteLine()
-- [X] Rimuovere la property che restituisce la griglia
-- [X] Creare una funzione che restituisca la copia della griglia 
-- [X] Utilizzare le costanti
-- [X] Spostare il metodo PrintGrid su Program.cs
+- [X] Rewrite turn logic.
+- [X] Move Console.WriteLine() & Console.ReadLine() to Program.cs
+- [X] Make victory control Iterative.
+	- [X] In the control use ENUM
+- [X] Enter array data from keyboard (ES. 1,1 will put it in the middle)
+	- [X] Check that the coordinates entered are correct.
+- [X] Use exceptions
+- [X] Add Boolean checks on InsertSymbol and remove Console.WriteLine()
+- [X] Remove the property that returns the grid.
+- [X] Create a function that returns the copy of the grid 
+- [X] Use constants
+- [X] Move the PrintGrid method to Program.cs.
 
 #### Tips
 
-- Nei booleani utilizzare Is, Has, Can
+- In Booleans use Is, Has, Can
