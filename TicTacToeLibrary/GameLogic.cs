@@ -141,38 +141,23 @@ namespace TicTacToeLibrary
                 }
             }
 
-            //COLUMN DA OTTIMIZZARE
-            int columnCounter = 0;
-            int column = 0;
-            int turn = 0;
-            int winnerCount = 0;
+            // COLUMN OK 
             for (int i = 0; i < MaxGridSize; i++)
             {
-                if (turn < (MaxGridSize * MaxGridSize) && columnCounter == MaxGridSize)
+                int counter = 0;
+                for (int j = 0; j < MaxGridSize; j++)
                 {
-                    i = 0;
-                    columnCounter = 0;
-
+                    if (matrix[j, i] == pg.Symbol)
+                    {
+                        counter++;
+                    }
                 }
-                if (matrix[i, column] == pg.Symbol)
-                {
-                    winnerCount++;
-                }
-                columnCounter++;
-                turn++;
-                if (winnerCount == MaxGridSize)
+                if (counter == MaxGridSize)
                 {
                     return true;
                 }
-                if (turn < (MaxGridSize * MaxGridSize) && columnCounter == MaxGridSize)
-                {
-                    column++;
-                    i = 0;
-                    winnerCount = 0;
-                }
-
             }
-
+            
             //MAIN DIAG OK
             int mainDiagCounter = 0;
             for (int i = 0; i < MaxGridSize; i++)
