@@ -27,6 +27,11 @@ namespace TicTacToeLibrary.Models
             return matrix;
         }
 
+        public void ResetGrid()
+        {
+            Array.Clear(_gameGrid, 0, _gameGrid.Length);
+        }
+
         public bool IsFilled(int row, int column)
         {
             return (!IsOut(row, column)) && (_gameGrid[row, column] != null);
